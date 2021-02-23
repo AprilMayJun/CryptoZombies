@@ -1,0 +1,6 @@
+// All solidity programs should start with a "version pragma" a declaration of the version of Solidity compiler used by the source code.
+pragma solidity >=0.5.0 <0.6.0;
+
+contract HelloWorld {
+
+}
