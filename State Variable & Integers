@@ -1,0 +1,36 @@
+// a contract is the "shell" of the program
+// state variables are permanently stored in contract storage; they're written to the Ethereum blockchain
+// structs allow you to create more complicated data types that have multiple properties
+// you can declare an array as public and Solidity will automatically create a getter method for it
+// return values: to return a value from a function use public/ private returns (string/uint, etc.)
+// public view returns vs. private pure returns: view - view the data but no modification access
+// pure - you're not even accessing any data in the app
+// Ethereum has the hash function keccak256 built in, which is a version of SHA3. 
+// Hash function - maps an input into a random 256-bit hexadecimal number. A change in input will change the hash
+// Events are a way for your contract to communicate an event on the blockchain
+
+pragma solidity >=0.5.0 <0.6.0;
+contract ZombieFactory {
+event NewZombie(uint zombieId, string name, uint dna);
+uint dnaDigits = 16;
+uint dnaModulus = 10 ** dnaDigits;
+struct Zombie {
+string name;
+uint dna;
+  }
+  Zombie[] public zombies;
+  function _createZombie(string memory _name, uint _dna) private {
+    uint id = zombies.push(Zombie(_name, _dna)) -1;
+        emit NewZombie(id, _name, _dna);
+  }
+  function _generateRandomDna(string memory _str) private view returns (uint) {
+  uint rand = uint(keccak256(abi.encodePacked(_str)));
+  return rand % dnaModulus;
+  }
+  function createRandomZombie(string memory _name) public {
+      uint randDna = _generateRandomDna(_name);
+        _createZombie(_name, randDna);
+    
+    }
+
+}
