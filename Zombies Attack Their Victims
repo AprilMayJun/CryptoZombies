@@ -1,0 +1,11 @@
+//Mappings and Addresses: The Ethereum blockchain is made up of accounts that have Ether. 
+//Each account has an address that points to an account.
+
+mapping (uint => address) public zombieToOwner;
+mapping (address => uint) ownerZombieCount;
+
+//msg.sender: is a global variable that is available to all functions. It refers to the address of the smart contract that called for the current function
+//import  "./someothercontract.sol";
+//contract newContract is SomeOtherContract {
+// } 
+// so if we had a file names someothercontract.sol in the same directory as this contract (that's what the ./ means), it would get imported by the compiler.
